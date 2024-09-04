@@ -1,0 +1,90 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+
+
+.top{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2%;
+    background-color: #1c2d5c;
+    color:#eef8fe;
+    font-size: 30px;
+
+
+}
+
+.top_buttons{
+    margin-right: 2%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+}
+
+.top_buttons >button{
+    margin-right: 2%;
+    padding: 3%;
+    background-color:#eef8fe;
+    color:#1c2d5c;
+    border-radius: 5px;
+    border: none;
+    min-width: 80px;
+
+}
+
+.container{
+    display:flex;
+    flex-direction: column;
+    /* padding: 5%; */
+    align-items: center;
+}
+
+.container >form{
+
+    margin: 5%;
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+
+.heading{
+    font-size: 30px;
+    margin-left: 2%;
+    margin-top: 3%;
+}
+
+.sub{
+    margin-left: 2%;
+    margin-top: 3%;
+}
+
+form>label{
+    margin-bottom: 5px;
+}
+
+form>input{
+    padding: 2px;
+}
+
+form >button{
+    margin-top: 8px;
+    color:#eef8fe;
+    background-color: #1c2d5c;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+a:link{
+    text-decoration: none;
+}
+
+input[readonly]{
+    background-color: rgb(236, 236, 236);
+    border: none;
+    
+}

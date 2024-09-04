@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'taxpage.css' %}" >
+    <style>
+        table, th, td {
+          border:1px solid black;
+        }
+    </style>
+    <title>Tax</title>
+</head>
+
+<body>
+    <div class="top">
+        <p>Welcome {{user.first_name}}</p>
+        <div class="top_buttons">
+          <button class="button"><a href="{% url 'base' %}">Home</a></button>
+          <button class="button"><a href="{% url 'profile'%}">View Profile</a></button>
+          <button class="button" type="submit"><a href="{% url 'signout' %}">signout</a></button>
+        </div>
+    </div>
+    <p class="main_heading">Water Charges</p>
+    <div class="container">
+        <p class="heading">Charge per Kilo Liter</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Range (Liters)</th>
+                    <th>Price per Kilo Liter (Currency)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for range, price in chargeRanges %}
+                <tr>
+                    <td>{{ range }}</td>
+                    <td>{{ price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p class="heading">Taxes Applied</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tax Name</th>
+                    <th>Charge</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>Meter Charge</td>
+                    <td>{{meterCharge}}</td>
+                </tr>
+                <tr>
+                    <td>Sanitary Charge</td>
+                    <td>{{sanitaryCharge}}</td>
+                </tr>
+                <tr>
+                    <td>Others</td>
+                    <td>{{other}}</td>
+                </tr>
+            </tbody>
+
+
+
+        </table>
+
+
+        
+
+
+
+    </div>
+    
+</body>
+</html>

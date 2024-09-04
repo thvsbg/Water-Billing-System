@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bills</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'bills.css' %}" >
+    <style>
+        table, th, td {
+          border:1px solid black;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="top">
+        <p>Welcome {{user.first_name}}</p>
+        <div class="top_buttons">
+          <button class="button"><a href="{% url 'base' %}">Home</a></button>
+          <button class="button"><a href="{% url 'profile'%}">View Profile</a></button>
+          <button class="button" type="submit"><a href="{% url 'signout' %}">signout</a></button>
+        </div>
+    </div>
+
+   
+   <div class="container">
+    <p class="heading">Previous Bills</p>
+   <form class="formpage" method="get">
+    <label for="month">Select Month:</label>
+    <select name="month" id="month">
+        <option value="">--All Months--</option>
+        <option value="January" {% if selected_month == "January" %}selected{% endif %}>January</option>
+        <option value="February" {% if selected_month == "February" %}selected{% endif %}>February</option>
+        <option value="March" {% if selected_month == "March" %}selected{% endif %}>March</option>
+        <option value="April" {% if selected_month == "April" %}selected{% endif %}>April</option>
+        <option value="May" {% if selected_month == "May" %}selected{% endif %}>May</option>
+        <option value="June" {% if selected_month == "June" %}selected{% endif %}>June</option>
+        <option value="July" {% if selected_month == "July" %}selected{% endif %}>July</option>
+        <option value="August" {% if selected_month == "August" %}selected{% endif %}>August</option>
+        <option value="September" {% if selected_month == "September" %}selected{% endif %}>September</option>
+        <option value="October" {% if selected_month == "October" %}selected{% endif %}>October</option>
+        <option value="November" {% if selected_month == "November" %}selected{% endif %}>November</option>
+        <option value="December" {% if selected_month == "December" %}selected{% endif %}>December</option>
+    </select>
+
+    <button type="submit">Search</button>
+   </form>
+   {% if bills %}
+   <table style="width:80%">
+    <tr>
+      <th>Meter Number</th>
+      <th>Read Date</th>
+      <th>Unit Use</th>
+      <th>Water Charges</th>
+      <th>Sanitary Charges</th>
+      <th>Meter Charge</th>
+      <th>Total bill</th>
+      <th>Due Date</th>
+      
+    </tr>
+
+        {% for bill in bills %}
+        <tr>
+            <td>{{user.meternumber}}</td>
+            <td>{{ bill.readDate }}</td>
+            <td>{{ bill.meterusage }}</td>
+            <td>{{ bill.waterValue }}</td>
+            <td>{{ bill.sanitaryCharge }}</td>
+            <td>{{ bill.meterCharge }}</td>
+            <td>{{ bill.totalamount }}</td>
+            <td>{{ bill.dueDate }}</td>
+        
+           
+            <!-- <td>{{ bill.currentDue }}</td> -->
+        </tr>
+        {% endfor %}
+
+   
+    </table>
+    </div>
+
+    {% else %}
+    <p>No billing records found for the selected month.</p>
+    {% endif %}
+    <!-- {% for bill in data %}
+    <p>{{bill.dueDate}}</p>
+    {% endfor %} -->
+   
+    
+</body>
+</html>

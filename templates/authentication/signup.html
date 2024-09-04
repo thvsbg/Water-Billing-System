@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'signup.css' %}" >
+</head>
+<body>
+    <div class="main_heading">Water Management System</div>
+    <div class="container">
+    <div class="heading">Signup</div>
+    
+    <form action="/signup" class="formpage" method="post">
+            {% csrf_token %}
+            {% if messages %}
+
+            {% for message in messages %}
+
+            <p>{{message}}</p>
+
+            {% endfor %}
+            {% endif %}
+
+            <label style="margin: 5px;">Enter the username</label>
+            <input type="text" name="username" placeholder="Create username" required>
+            <label style="margin: 5px;">Enter your First name</label>
+            <input type="text" name="fname" placeholder="First name" required>
+            <label style="margin: 5px;">Enter your Last name</label>
+            <input type="text" name="lname" placeholder="Last name" required>
+            <label style="margin: 5px;">Enter your email id</label>
+            <input type="email" name="mail" placeholder="email" required>
+            <label style="margin: 5px">Enter your Meter number</label>
+            <input type="text" name="meterno" placeholder="meter number" required>
+            <label style="margin: 5px">Enter your Division</label>
+            <input type="text" name="add" placeholder="division" required>
+        
+            <label style="margin: 5px;">Password</label>
+            <input type="password" name="pass1" placeholder="create a password within 50 characters" required>
+            <label style="margin: 5px;">Confirm Password</label>
+            <input type="password" name="pass2" placeholder="Confirm password" required>
+            <button type="submit" class="button">Submit</button>
+
+    </form>
+    </div>
+
+    
+</body>
+</html>

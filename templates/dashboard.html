@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meter Usage Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'dashboard.css' %}" >
+
+</head>
+<body>
+    <div class="top">
+        <p>Welcome {{user.first_name}}</p>
+        <div class="top_buttons">
+          <button class="button"><a href="{% url 'base' %}">Home</a></button>
+          <button class="button"><a href="{% url 'profile'%}">View Profile</a></button>
+          <button class="button" type="submit"><a href="{% url 'signout' %}">signout</a></button>
+        </div>
+    </div>
+    <div class="container">
+    <p class="heading">Meter Usage Over the Months</p>
+
+    <form method="get">
+        <label for="year">Select Year:</label>
+        <select name="year" id="year" onchange="this.form.submit()">
+            {% for year in available_years %}
+                <option value="{{ year.year }}" {% if selected_year|stringformat:"s" == year.year|stringformat:"s" %}selected{% endif %}>{{ year.year }}</option>
+            {% endfor %}
+        </select>
+    </form>
+
+    <canvas id="usageChart"></canvas>
+    </div>
+<!-- 
+    <script id="months-data" type="application/json">
+        {{ months|json_script:"months-data" }}
+    </script>
+    
+    <script id="usages-data" type="application/json">
+        {{ usages|json_script:"usages-data" }}
+    </script> -->
+
+    <script>
+        // Get the data passed from the Django view
+        // var months = {{ months|safe }};
+        // var usages = {{ usages|safe }};
+        var months = JSON.parse('{{ months_json|escapejs }}');
+        var usages = JSON.parse('{{ usages_json|escapejs }}');
+        // var months = JSON.parse(document.getElementById('months-data').textContent);
+        // var usages = JSON.parse(document.getElementById('usages-data').textContent);
+        console.log("Months in view :", months);  // Debugging line
+        console.log("Usages in view:", usages);
+
+        
+        if (months.length > 0 && usages.length > 0){
+        var ctx = document.getElementById('usageChart').getContext('2d');
+        var usageChart = new Chart(ctx, {
+            type: 'line',  
+            data: {
+                labels: months,
+                datasets: [{
+                    label: 'Meter Usage',
+                    data: usages,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1,
+                    fill: false  // Line chart won't be filled
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+    </script>
+</body>
+</html>

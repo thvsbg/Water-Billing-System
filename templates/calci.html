@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        table, th, td {
+          border:1px solid black;
+        }
+    </style>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'calci.css' %}" >
+
+    <title>Calculator</title>
+
+</head>
+<body>
+
+    <div class="top">
+      <p>Welcome {{user.first_name}}</p>
+      <div class="top_buttons">
+        <button class="button"><a href="{% url 'base' %}">Home</a></button>
+        <button class="button"><a href="{% url 'profile'%}">View Profile</a></button>
+        <button class="button" type="submit"><a href="{% url 'signout' %}">signout</a></button>
+      </div>
+    </div>
+    <div class="container">
+    <p class="heading" >Calculate Water Bill</p>
+    {% if messages %}
+
+      {% for message in messages %}
+        <p>{{ message }}</p>
+      {% endfor %}
+    {% endif %}
+    <!-- <button><a href="{% url 'bills' %}">View Past Bills</a></button> -->
+    <form  class="formpage" method="post">
+    {% csrf_token %}
+    {{data}}
+   
+      <label>Enter Units of water used</label>
+      <input type="number" name="units" value="{{unitUse}}">
+    
+      
+      <label>Date of Reading</label>
+      <input type="date" name="dateReading" value="{{dor}}" >
+      
+
+
+      <button type="submit" name="calc">Calculate</button>
+      <button type="submit" name="save">Save</button>
+      <!-- <button><a href="{% url 'bills' %}">View Past Bills</a></button> -->
+   
+    
+
+      <table style="width:100%">
+          <tr>
+            <th>Item Name</th>
+            <th>In Rupees</th>
+          </tr>
+          <!-- <tr>
+            <td>Name</td>
+            <td></td>
+          
+          </tr>
+          <tr>
+            <td>Division</td>
+            <td>Francisco Chang</td>
+          </tr>
+          <tr>
+            <td>Meter Number</td>
+            <td>Francisco Chang</td>
+          </tr>
+          <tr> -->
+            <td>Unit Usage</td>
+            <td >{{unitUse}}</td>
+          </tr>
+          <tr>
+            <td>Water Charge</td>
+            <td >{{waterVal}}</td>
+          </tr>
+          <tr>
+            <td>Sanitary Charge</td>
+            <td>{{sanitaryCharge}}</td>
+          </tr>
+          <tr>
+            <td>Meter Charge</td>
+            <td >{{meterCharge}}</td>
+          </tr>
+
+          <tr>
+            <td>Date of Reading</td>
+            <td name>{{dor}}</td>
+          </tr>
+          <tr>
+            <td>Due date</td>
+            <td name=>{{dueDate}}</td>
+          </tr>
+          <!-- <tr>
+            <td>Previous Dues</td>
+            <td>Francisco Chang</td>
+          </tr> -->
+          <tr>
+            <td>Total Charge</td>
+            <td >{{totalBill}}</td>
+          </tr>
+
+          
+        </table>
+        <button class="button"><a href="{% url 'bills' %}">View Past Bills</a></button>
+
+        <input type="hidden" value="{{sanitaryCharge}}" name="sanitaryCharge">
+        <input type="hidden" value="{{unitUse}}" name="unitUse">
+        <input type="hidden" value="{{dor}}" name="dateofReading">
+        <input type="hidden" value="{{dueDate}}" name="dueDate">
+        <input type="hidden" value="{{meterCharge}}" name="meterCharge">
+        <input type="hidden" value="{{waterVal}}" name="waterVal">
+        <input type="hidden" value="{{totalBill}}" name="totalBill">
+      </form>
+      </div>
+
+
+
+      <!-- <form method="post" action="">
+        {% csrf_token %}
+
+        <input name="sanitaryCharge" value="{{ sanitaryCharge }}">
+        <button type="submit" name="save">Save</button>
+
+
+
+
+
+      </form> -->
+
+       
+
+
+    
+    
+
+
+
+</body>
+</html>

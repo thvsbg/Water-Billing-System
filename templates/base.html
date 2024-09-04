@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>loggedin</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}" >
+</head>
+<body>
+    <!-- {% if user.is_authenticated %} -->
+    <div class="top">
+        <p>Welcome {{user.first_name}}</p>
+        <div class="top_buttons">
+        <button class="button"><a href="{% url 'profile'%}">View Profile</a></button>
+        <button class="button" type="submit"><a href="{% url 'signout' %}">signout</a></button>
+        </div>
+    </div>
+    <div class="container">
+        
+        <div class="box">
+            <p>View past bills</p>
+            <button class="button" ><a href="bills">Click here</a> </button>
+        </div>
+        <div class="box">
+            <p>Calculate new bill</p>
+            <button class="button"><a href="base/calci">Click here</a></button>
+        </div>
+        <div class="box">
+            <p>View Charges</p>
+            <button class="button"><a href="{% url 'taxpage' %}">Click here</a></button>
+        </div>
+        <div class="box">
+            <p>View Water usage Dashboard</p>
+            <button class="button"><a href="{% url 'dashboard' %}">Click here</a></button>
+        </div>
+       
+    </div>
+
+    <!-- {% else %} -->
+    <!-- <button type="submit" ><a href="/signin">Signin</a></button> -->
+
+    <!-- {% endif %} -->
+    
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signin</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'signin.css' %}" >
+
+</head>
+<body>
+    <div class="main_heading">Water Management System</div>
+    <div class="container">
+    <div class="heading">Sign in</div>
+    <form  class="formpage" action="{% url 'doLogin' %}", method="post">
+        {% csrf_token %}
+        {% if messages %}
+        {% for message in messages %}
+        <p>
+        
+        {{ message }}
+        </p>
+        {% endfor %}
+        {% endif %}
+        <label>Username</label>
+        <input type="text" name="uname" placeholder="Enter your username">
+        <label>Password</label>
+        <input type="password" name="passw" placeholder="Enter your password">
+        <button type="submit">Submit</button>
+        
+    </form>
+    </div>
+    
+</body>
+</html>
