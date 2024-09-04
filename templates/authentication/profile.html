@@ -19,17 +19,18 @@
 
     <p class="heading">Welcome to Profile </p>
     <p class="sub">Enter the details to update and click on Update Profile to update</p>
+
+    {% if messages %}
+    {% for message in messages %}
+    <p class="message">
+    
+        {{ message }}
+    </p>
+    {% endfor %}
+    {% endif %}
     <div class="container">
         <form method="post" action="{% url 'update' %}">
         {% csrf_token %}
-        {% if messages %}
-            {% for message in messages %}
-            <p>
-            
-                {{ message }}
-            </p>
-            {% endfor %}
-        {% endif %}
         
         <label>Username</label>
         <input type="text" value="{{user.username}}" readonly>

@@ -88,3 +88,9 @@ input[readonly]{
     border: none;
     
 }
+
+.message{
+    margin-left: 2%;
+    font-size: 20px;
+    color: #1c2d5c;
+}

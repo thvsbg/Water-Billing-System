@@ -35,8 +35,8 @@ def signup(request):
             messages.error(request, "Meter Number already registered")
             return redirect("signup")
         
-        if not pass2.isalnum():
-            messages.error(request, "Password should be alphanumeric")
+        if not pass2.isalnum() or len(pass2)<6:
+            messages.error(request, "Password should be alphanumeric and of length 6")
             return redirect("signup")
 
         
@@ -136,6 +136,10 @@ def update(request):
         newmail=request.POST.get("email")
         newPass=request.POST.get("newPass")
         finPass=request.POST.get("finPass")
+
+        if not finPass.isalnum() or len(finPass)<6:
+            messages.error(request,"Password should be  of length 6 and alphanumeric")
+            redirect("update")
 
         # if newPass!=finPass:
         #     messages.error(request,"Passwords didn't match")
